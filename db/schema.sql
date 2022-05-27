@@ -4,10 +4,10 @@ DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS managers;
 
 -- !primary key is already NOT NULL and UNIQUE
-CREATE TABLE managers (
-manager_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-manager_full_name VARCHAR(60) NOT NULL
-);
+-- CREATE TABLE managers (
+-- manager_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+-- manager_full_name VARCHAR(60) NOT NULL
+-- );
 
 CREATE TABLE departments (
 department_id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -29,5 +29,5 @@ last_name VARCHAR(30) NOT NULL,
 role INTEGER,
 manager INTEGER,
 FOREIGN KEY (role) REFERENCES roles(role_id) ON DELETE SET NULL,
-FOREIGN KEY (manager) REFERENCES managers(manager_id) ON DELETE SET NULL
+FOREIGN KEY (manager) REFERENCES employees(employee_id) ON DELETE SET NULL
 );

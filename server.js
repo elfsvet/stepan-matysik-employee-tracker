@@ -2,6 +2,20 @@ const inquirer = require('inquirer');
 const express = require('express');
 const db = require('./db/connection');
 const apiRoutes = require('./routes/apiRoutes');
+const cTable = require('console.table');
+
+
+// call once somewhere in the beginning of the app
+console.table([
+  {
+    name: 'foo',
+    age: 10
+  }, {
+    name: 'bar',
+    age: 20
+  }
+]);
+
 
 
 const PORT = process.env.PORT || 3001;
@@ -31,6 +45,7 @@ db.connect(err => {
     });
 
 })
+
 
 
 
