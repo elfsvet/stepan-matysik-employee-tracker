@@ -1,4 +1,38 @@
 const inquirer = require('inquirer');
+const express = require('express');
+const db = require('./db/connection');
+const apiRoutes = require('./routes/apiRoutes');
+
+
+const PORT = process.env.PORT || 3001;
+const app = express();
+
+// express middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// use apiRoutes
+// after we added prefix '/api' here we can remove it from individual route expressions
+app.use('/api', apiRoutes);
+
+// Catchall route should be the last route before listen
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+    res.status(404).end();
+});
+
+// start server after DB connection
+// function to start the Express server. Keep to the bottom
+db.connect(err => {
+    if (err) throw err;
+    console.log('🔌 Database connected. 🔌');
+    app.listen(PORT, () => {
+        console.log(`🌎 Server running on port http://localhost:${PORT} 🌎`);
+    });
+
+})
+
+
 
 // options to choose:
 //view all departments,

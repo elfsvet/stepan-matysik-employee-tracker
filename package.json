@@ -1,0 +1,26 @@
+{
+  "name": "stepan-matysik-employee-tracker",
+  "version": "1.0.0",
+  "description": "User Story\r AS A business owner\r I WANT to be able to view and manage the departments, roles, and employees in my company\r SO THAT I can organize and plan my business",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elfsvet/stepan-matysik-employee-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elfsvet/stepan-matysik-employee-tracker/issues"
+  },
+  "homepage": "https://github.com/elfsvet/stepan-matysik-employee-tracker#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "inquirer": "^8.2.4",
+    "jest": "^28.1.0",
+    "mysql2": "^2.3.3"
+  }
+}

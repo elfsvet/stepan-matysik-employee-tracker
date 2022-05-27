@@ -29,11 +29,10 @@ VALUES
 ('Stepan','Matysik',9,2),
 ('Ekaterina','Shabaeva',5,1),
 ('John','Doe',6,3),
-('','',10,1),
-('','',8,1),
-('','',7,1),
-('','',4,1),
-('','',3,1),
-('','',2,1),
-('','',1,1);
--- need to finishe names
+('Zina','Bolotnova',10,1),
+('Gregory','Ekimov',8,3),
+('Alex','Zee',7,2),
+('Nadya','Barkova',4,1),
+('Dmitry','Kibisov',3,2),
+('Dinara','Aflyatunova',2,3),
+('Karina','Orlova',1,1);

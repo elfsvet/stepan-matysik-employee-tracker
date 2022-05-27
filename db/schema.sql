@@ -2,7 +2,8 @@ DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS managers;
--- primary key is already NOT NULL and UNIQUE
+
+-- !primary key is already NOT NULL and UNIQUE
 CREATE TABLE managers (
 manager_id INTEGER AUTO_INCREMENT PRIMARY KEY,
 manager_full_name VARCHAR(60) NOT NULL
