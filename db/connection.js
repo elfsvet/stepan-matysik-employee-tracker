@@ -1,4 +1,4 @@
-// import the mysql2 package
+// import the mysql2 package/ get the client
 const mysql = require('mysql2');
 
 // connect the application to the MySql database
@@ -13,5 +13,10 @@ const db = mysql.createConnection(
     },
     console.log(`🔌 Connected to the election database. 🔌`)
 );
+
+  db.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected to database.")
+  });
 
 module.exports = db;

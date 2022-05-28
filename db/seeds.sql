@@ -4,14 +4,14 @@
 -- ('Mikhail Shevelev'),
 -- ('Viacheslav Savidov');
 
-INSERT INTO departments (department_name)
+INSERT INTO departments (name)
 VALUES
 ('sales'),
 ('pr'),
 ('accounting'),
 ('development');
 
-INSERT INTO roles(job_title, salary, department)
+INSERT INTO roles(title, salary, department_id)
 VALUES
 ('consultant',45000, 1),
 ('cashier',50000,1),
@@ -24,7 +24,7 @@ VALUES
 ('full-stack lead',120000,4),
 ('project manager', 180000, 4);
 
-INSERT INTO employees(first_name,last_name,role,manager)
+INSERT INTO employees(first_name,last_name,role_id,manager_id)
 VALUES
 ('Stepan','Matysik',9,NULL),
 ('Ekaterina','Shabaeva',5,NULL),
