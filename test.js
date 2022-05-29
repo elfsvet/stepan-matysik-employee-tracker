@@ -15,6 +15,12 @@ const getEmployees = () => {
     return connection.promise().query('SELECT * FROM employees')
 };
 
+console.log('----------------------------------------------')
+console.log('||                                          ||')
+console.log('||                 WELCOME                  ||')
+console.log('||                                          ||')
+console.log('----------------------------------------------')
+
 // prompt the questions
 const startQuestion = () => {
     inquirer.prompt({
@@ -66,13 +72,30 @@ const startQuestion = () => {
 const viewAllDepartments = () => {
     // query to view all departments
     const sql = `SELECT * FROM departments`;
-    const query = connection.query(sql, (err, rows) => {
+    connection.query(sql, (err, rows) => {
         if (err) throw err;
-        console.log(`\n Departments in the database\n`);
+        console.log(`\n Departments in the database \n`);
         console.table(rows);
         startQuestion();
     });
 };
+
+const viewAllRoles = () => {
+    // query to view roles with dapartment ID retruned with name
+    const sql = `SELECT roles.id, roles.title, roles.salary,departments.name AS department FROM roles
+    JOIN departments
+    ON roles.department_id = departments.id`;
+    connection.query(sql, (err,rows) => {
+        if (err) throw err;
+        console.log('\n All Roles \n');
+        console.table(rows);
+        startQuestion();
+    })
+};
+
+const viewAllEmployees = () => {
+    const sql = ``
+}
 
 
 
