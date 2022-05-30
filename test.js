@@ -62,8 +62,8 @@ const startQuestion = () => {
                 break;
             case 'Exit':
                 console.log('See you!');
-                connection.end(err =>{
-                    if(err) {
+                connection.end(err => {
+                    if (err) {
                         return console.log(`error: ${err.message}`);
                     }
                     console.log('Close the database connection.')
@@ -136,60 +136,93 @@ const addDepartment = () => {
 
 
 
+const addRole = () => {
+    getDepartments().then(rows => {
+        let departmentNameArray = [];
+        let departmentArray = rows[0];
+        for (var i = 0; i < departmentArray.length; i++) {
+            let department = departmentArray[i].name;
+            departmentNameArray.push(department);
+        }
+        inquirer.prompt([
+            {
+                // Prompt user role title
+                type: 'input',
+                name: 'title',
+                message: 'Enter the role title: '
+            },
+            {
+                // Prompt user for salary
+                type: 'number',
+                name: 'salary',
+                message: 'Enter the role salary: '
+            },
+            {
+                // Prompt user for department the role is under
+                type: 'list',
+                name: 'department',
+                message: 'Enter the department of the role: ',
+                choices: departmentNameArray
+            }])
+            .then(answer => {
+                let department_id;
+                for (let i = 0; i < departmentArray.length; i++) {
+                    if (answer.department === departmentArray[i].name) {
+                        department_id = departmentArray[i].id;
+                        break;
+                    }
+                }
+                // Added role to the role table
+                connection.query('INSERT INTO roles SET ?'),
+                {
+                    title: answer.title,
+                    salary: answer.salary,
+                    department_id: department_id
+                },
+                    (err, result) => {
+                        if (err) throw err;
+                        console.log(`${answer.title} added to roles!\n`);
+                        startQuestion();
+                    }
+            });
+    });
+};
+
+
 // const addRole = () => {
-//     getDepartments().then(rows => {
-//         let departmentNameArray = [];
-//         let departmentArray = rows[0];
-//         for (var i = 0; i < departmentArray.length; i++) {
-//             let department = departmentArray[i].name;
-//             departmentNameArray.push(department);
+//     // we will ask the user to answer the questions
+//     inquirer.prompt(
+//         {
+//             type: "input",
+//             name: "title",
+//             message: "What is new job title?"
+//         },
+//         {
+//             type: "input",
+//             name: "salary",
+//             message: "What is the salary for this job?"
+//         },
+//         {
+//             type: 'input',
+//             name: 'department_id',
+//             message: 'What is the department id?'
 //         }
-//         inquirer.prompt([
-//             {
-//                 // Prompt user role title
-//                 type: 'input',
-//                 name: 'title',
-//                 message: 'Enter the role title: '
-//             },
-//             {
-//                 // Prompt user for salary
-//                 type: 'number',
-//                 name: 'salary',
-//                 message: 'Enter the role salary: '
-//             },
-//             {
-//                 // Prompt user for department the role is under
-//                 type: 'list',
-//                 name: 'department',
-//                 message: 'Enter the department of the role: ',
-//                 choices: departmentNameArray
-//             }])
-//             .then(answer => {
-//                 let department_id;
-//                 for (let i = 0; i < departmentArray.length; i++) {
-//                     if (answer.department === departmentArray[i].name) {
-//                         department_id = departmentArray[i].id;
-//                         break;
-//                     }
-//                 }
-//                 // Added role to the role table
-//                 connection.query('INSERT INTO roles SET ?'),
+//         ).then(answer => {
+//             connection.query(`INSERT INTO roles (title, salary, department_id) VALUES (?)`,
 //                 {
 //                     title: answer.title,
 //                     salary: answer.salary,
-//                     department_id: department_id
+//                     department_id: parseInt(answer.department_id)
 //                 },
-//                     (err, result) => {
-//                         if (err) throw err;
-//                         console.log(`${answer.title} added to roles!\n`);
-//                         startQuestion();
+//                 (err, result) => {
+//                     if (err) {
+//                         return console.log(`error ${err.message}`);
 //                     }
-//             });
-//     });
+//                     console.log(`You have added ${answer.title} to the roles`);
+//                     startQuestion();
+//                 });
+//         });
 // };
-
-
-
 
 // start the app should be at the bottom of the file
 startQuestion();
