@@ -62,7 +62,12 @@ const startQuestion = () => {
                 break;
             case 'Exit':
                 console.log('See you!');
-                connection.end();
+                connection.end(err =>{
+                    if(err) {
+                        return console.log(`error: ${err.message}`);
+                    }
+                    console.log('Close the database connection.')
+                });
                 break;
         }
     });
@@ -128,6 +133,8 @@ const addDepartment = () => {
             });
     });
 };
+
+
 
 // const addRole = () => {
 //     getDepartments().then(rows => {

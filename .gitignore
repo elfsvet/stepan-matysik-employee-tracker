@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# DATABASE connection file. TO PROTECT THE PASSWORD
+db/connection.js
