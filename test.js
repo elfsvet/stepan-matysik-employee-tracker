@@ -317,6 +317,33 @@ const updateEmployeeRole = () => {
     })
 }
 
+const deleteRole = () => {
+    const sql =  `SELECT * FROM roles`;
+    connection.query(sql,(err,data)=>{
+        if(err) throw err;
+        const roles = data.map(({title,id}) => ({name: title, value: id}));
+        
+        inquirer.prompt([
+        {
+            type: 'list',
+            name: 'role',
+            message: 'What role do you want to delete?',
+            choices: roles
+        }
+        ]).then(answer => {
+            const params = answer.role;
+            const sql = `DELETE FROM roles WHERE id = ?`;
+
+            connection.query(sql, params, (err,result)=>{
+                if (err) throw err;
+                console.log("Successfully deletet!");
+
+                viewAllRoles();
+            })
+        })
+    })
+}
+
 const deleteDepartment = () => {
     const sql = `SELECT * FROM departments`;
 
@@ -345,7 +372,21 @@ const deleteDepartment = () => {
     })
 };
 
+const viewBudget = ()=>{
+    console.log('Showing the budget by department...\n');
 
+    const sql = `SELECT department_id AS id,
+    departments.name AS department,
+    SUM(salary) AS budget
+    FROM roles
+    JOIN departments ON roles.department_id = departments.id GROUP BY department_id`;
+
+    connection.query(sql,(err,rows) => {
+        if(err) throw err;
+        console.table(rows);
+        startQuestion();
+    })
+}
 
 
 // start the app should be at the bottom of the file
