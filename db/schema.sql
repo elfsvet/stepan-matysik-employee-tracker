@@ -1,3 +1,10 @@
+-- delete db if any
+DROP DATABASE IF EXISTS employee_tracker;
+-- create a db
+CREATE DATABASE employee_tracker;
+-- choose the db and use it
+USE employee_tracker;
+
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS departments;
