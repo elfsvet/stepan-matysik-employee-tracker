@@ -1,5 +1,7 @@
 // import the mysql2 package/ get the client
 const mysql = require('mysql2');
+// to use hidden information stored in .env we would need to install npm i dotenv
+require('dotenv').config();
 
 // connect the application to the MySql database
 // creater a connection to the mysql database by calling createConnection() method and providing the detailed information on mysql server such as host, user, password and database as follows
@@ -7,10 +9,10 @@ const connection = mysql.createConnection(
     {
         host: 'localhost',
         // my MySql username,
-        user: 'root',
+        user: process.env.DB_USER,
         // MY Mysql password
-        password: 'root',
-        database: 'employee_tracker'
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
     }
     // ,
     // console.log(`🔌 Connected to the election database. 🔌`)

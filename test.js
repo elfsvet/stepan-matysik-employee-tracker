@@ -66,7 +66,7 @@ const startQuestion = () => {
             case 'Update an employee role':
                 updateEmployeeRole();
                 break;
-            case 'Update an employee by manager':
+            case 'Update an employee manager':
                 updateEmployeeManager();
                 break;
             case 'View employees by department':
@@ -310,39 +310,84 @@ const updateEmployeeRole = () => {
                         console.log('Employee has been updated!');
 
                         viewAllEmployees();
-                    })
-                })
-            })
-        })
-    })
-}
+                    });
+                });
+            });
+        });
+    });
+};
 
-const deleteRole = () => {
-    const sql =  `SELECT * FROM roles`;
-    connection.query(sql,(err,data)=>{
-        if(err) throw err;
-        const roles = data.map(({title,id}) => ({name: title, value: id}));
-        
+const updateEmployeeManager = () => {
+    // console.log('hello');
+    const sql = `SELECT * FROM employees`;
+
+    connection.query(sql, (err, data) => {
+        if (err) throw err;
+
+        const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + ' ' + last_name, value: id }));
+
         inquirer.prompt([
-        {
-            type: 'list',
-            name: 'role',
-            message: 'What role do you want to delete?',
-            choices: roles
-        }
+            {
+                type: 'list',
+                name: 'name',
+                message: 'Which employee would you like to update?',
+                choices: employees
+            }
         ]).then(answer => {
-            const params = answer.role;
-            const sql = `DELETE FROM roles WHERE id = ?`;
+            const employee = answer.name;
+            const params = [];
+            params.push(employee);
 
-            connection.query(sql, params, (err,result)=>{
+            const sql = `SELECT * FROM employees`;
+
+            connection.query(sql, (err, data) => {
                 if (err) throw err;
-                console.log("Successfully deletet!");
 
-                viewAllRoles();
-            })
-        })
-    })
-}
+                const managers = data.map(({ id, first_name, last_name }) => ({ name: first_name + ' ' + last_name, value: id }));
+
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'manager',
+                        message: "Who is employee's manager?",
+                        choices: managers
+                    }
+                ]).then(answer => {
+                    const manager = answer.manager;
+                    params.push(manager);
+                    let employee = params[0];
+                    params[0] = manager;
+                    params[1] = employee;
+
+                    const sql = `UPDATE employees SET manager_id = ? WHERE id = ?`;
+                    connection.query(sql, params, (err, result) => {
+                        if (err) throw err;
+                        console.log('Employee has been updated!');
+
+                        viewAllEmployees();
+                    });
+                });
+            });
+        });
+    });
+};
+
+const viewEmployeeByDepartment = () => {
+    console.log('Showing employees by departments...\n');
+    const sql = `SELECT employees.first_name,
+    employees.last_name,
+    departments.name AS department
+    FROM employees
+    LEFT JOIN roles on employees.role_id = roles.id
+    LEFT JOIN departments ON roles.department_id = departments.id
+    ORDER BY departments.id`;
+
+    connection.query(sql, (err, rows) => {
+        if (err) throw err;
+        console.table(rows);
+        startQuestion();
+    });
+};
 
 const deleteDepartment = () => {
     const sql = `SELECT * FROM departments`;
@@ -372,7 +417,62 @@ const deleteDepartment = () => {
     })
 };
 
-const viewBudget = ()=>{
+const deleteRole = () => {
+    const sql = `SELECT * FROM roles`;
+    connection.query(sql, (err, data) => {
+        if (err) throw err;
+        const roles = data.map(({ title, id }) => ({ name: title, value: id }));
+
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'role',
+                message: 'What role do you want to delete?',
+                choices: roles
+            }
+        ]).then(answer => {
+            const params = answer.role;
+            const sql = `DELETE FROM roles WHERE id = ?`;
+
+            connection.query(sql, params, (err, result) => {
+                if (err) throw err;
+                console.log("Successfully deletet!");
+
+                viewAllRoles();
+            })
+        })
+    })
+}
+
+const deleteEmployee = () => {
+    const sql = `SELECT * FROM employees`;
+
+    connection.query(sql, (err, data) => {
+        if (err) throw err;
+
+        const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " " + last_name, value: id }));
+
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'name',
+                message: 'Which employee would you like to delete?',
+                choices: employees
+            }
+        ]).then(answer => {
+            const params = answer.name;
+            const sql = `DELETE FROM employees WHERE id = ?`;
+
+            connection.query(sql, params, (err, result) => {
+                if (err) throw err;
+                console.log('Successfully deleted!');
+                viewAllEmployees();
+            });
+        });
+    });
+};
+
+const viewBudget = () => {
     console.log('Showing the budget by department...\n');
 
     const sql = `SELECT department_id AS id,
@@ -381,8 +481,8 @@ const viewBudget = ()=>{
     FROM roles
     JOIN departments ON roles.department_id = departments.id GROUP BY department_id`;
 
-    connection.query(sql,(err,rows) => {
-        if(err) throw err;
+    connection.query(sql, (err, rows) => {
+        if (err) throw err;
         console.table(rows);
         startQuestion();
     })
