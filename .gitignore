@@ -103,5 +103,5 @@ dist
 # TernJS port file
 .tern-port
 
-
+# Dotenv file with sensetive informantion
 .env

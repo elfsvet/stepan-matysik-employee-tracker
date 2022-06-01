@@ -1,9 +1,4 @@
--- INSERT INTO managers (manager_full_name) 
--- VALUES
--- ('Alex Gurinovich'),
--- ('Mikhail Shevelev'),
--- ('Viacheslav Savidov');
-
+-- testing data for the tables
 INSERT INTO departments (name)
 VALUES
 ('sales'),

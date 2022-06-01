@@ -4,18 +4,14 @@ DROP DATABASE IF EXISTS employee_tracker;
 CREATE DATABASE employee_tracker;
 -- choose the db and use it
 USE employee_tracker;
-
+-- delete tables in right order
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS managers;
 
 -- !primary key is already NOT NULL and UNIQUE
--- CREATE TABLE managers (
--- manager_id INTEGER AUTO_INCREMENT PRIMARY KEY,
--- manager_full_name VARCHAR(60) NOT NULL
--- );
-
+-- create tables
 CREATE TABLE departments (
 id INTEGER AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(30) NOT NULL
