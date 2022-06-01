@@ -1,38 +1,77 @@
-# stepan-matysik-employee-tracker
+# Stepan Matysik's Employee-Tracker (CMS)
+> Employee Tracker project. A video with a employee tracker project description.
+> Live demo [_here_](). 
 
-User Story
-AS A business owner
-I WANT to be able to view and manage the departments, roles, and employees in my company
-SO THAT I can organize and plan my business
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Installation](#installation)
+* [Instructions](#instructions)
+* [Features](#features)
+* [Screenshots](#screenshots)
+* [Usage](#usage)
+* [Project Status](#project-status)
+* [Room for Improvement](#room-for-improvement)
+* [Acknowledgements](#acknowledgements)
+* [Contacts](#contact)
 
-Acceptance Criteria
-GIVEN a command-line application that accepts user input
-WHEN I start the application
-THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
-WHEN I choose to view all departments
-THEN I am presented with a formatted table showing department names and department ids
-WHEN I choose to view all roles
-THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
-WHEN I choose to view all employees
-THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
-WHEN I choose to add a department
-THEN I am prompted to enter the name of the department and that department is added to the database
-WHEN I choose to add a role
-THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
-WHEN I choose to add an employee
-THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-WHEN I choose to update an employee role
-THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
-Bonus
-Try to add some additional functionality to your application, such as the ability to do the following:
 
-Update employee managers.
+## General Info
+This project is a employee tracker. Uses back end to simplify the process of creation and monitoring departments/roles/employees.
+## Technologies
+Project is created with:
+- JavaScript
+- Node.js
+- npm
 
-View employees by manager.
+## Installation
+To open this project in vscode using git in Terminal/Git Bash:
 
-View employees by department.
+```
+$ cd in directory there you want to store your project
+$ git clone https://github.com/elfsvet/stepan-matysik-employee-tracker.git
+$ code .
+```
 
-Delete departments, roles, and employees.
+## Instructions
+1. You would need to run commands in terminal at the directory of the project:
+```
+$npm install inquirer
+$npm install express
+$npm install dotenv
 
-View the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
+```
+2. To run application:
+```
+$npm start
+```
+3. Follow the questions and steps.
+4. Check the dist folder.
+
+## Features
+- Inquirer package
+- Jest package
+
+## Screenshots
+![Example screenshot](./src/images/screen-shot.png)
+
+If you haven't checked the link to the video with the application process please [CLICK HERE ⬇️](https://youtu.be/A1Pvhj1zYf8)
+
+
+## Usage
+For creating a team and have easy access to the contact information.
+## Project Status
+Project is: _complete_
+
+## Room for Improvement
+To do:
+- We can feature the team members by their ranks
+
+## Acknowledgements
+- This project was inspired by UM Coding Boot Camp
+- This project was creating from scratch using a gif picture.
+![Example gif](./src/images/sample.jpg)
+## Contact
+Created by [@elfsvet](https://github.com/elfsvet)
+- [LinkedIn](https://www.linkedin.com/in/stepanmatysik/)
