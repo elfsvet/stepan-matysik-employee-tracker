@@ -1,6 +1,6 @@
 # Stepan Matysik's Employee-Tracker (CMS)
 > Employee Tracker project. A video with a employee tracker project description.
-> Live demo [_here_](). 
+> Live demo [_here_](https://youtu.be/e_2TkKhup44). 
 
 ## Table of contents
 * [General info](#general-info)
@@ -42,36 +42,55 @@ $npm install express
 $npm install dotenv
 
 ```
-2. To run application:
+2. To upload data bases:
+```
+$ mysql -u root -p
+Enter your password:
+mysql> source db/schema.sql;
+mysql> source db/seeds.sql;
+mysql> quit;
+```
+3. To run application:
+- Create a file .env in root directory, and paste your data in user and password filed.
+```
+DB_NAME='employee_tracker'
+DB_USER='user'
+DB_PASSWORD='password'
+```
+
 ```
 $npm start
 ```
-3. Follow the questions and steps.
-4. Check the dist folder.
+
+4. Follow the questions and steps.
+
 
 ## Features
 - Inquirer package
-- Jest package
+- Dotenv package
+- Express package
 
 ## Screenshots
-![Example screenshot](./src/images/screen-shot.png)
+![Example screenshot](./assets/images/sample.jpg)
 
-If you haven't checked the link to the video with the application process please [CLICK HERE ⬇️](https://youtu.be/A1Pvhj1zYf8)
+If you haven't checked the link to the video with the application process please [CLICK HERE ⬇️](https://youtu.be/e_2TkKhup44)
 
 
 ## Usage
-For creating a team and have easy access to the contact information.
+For creating a company managing list of employees and have easy access to all departments and roles.
 ## Project Status
 Project is: _complete_
 
 ## Room for Improvement
 To do:
-- We can feature the team members by their ranks
+- UI/UX
 
 ## Acknowledgements
 - This project was inspired by UM Coding Boot Camp
-- This project was creating from scratch using a gif picture.
-![Example gif](./src/images/sample.jpg)
+- This project was creating from scratch using those png pictures.
+![Example png](./assets/images/pic1.png)
+
+![Example png](./assets/images/pic2.png)
 ## Contact
 Created by [@elfsvet](https://github.com/elfsvet)
 - [LinkedIn](https://www.linkedin.com/in/stepanmatysik/)
